@@ -19,9 +19,18 @@ public class Start {
 			Connection con = ds.getConnection();
 			// Abfrage vorbereiten und ausführen
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery("select * from sender limit 10");
+			ResultSet rs = st.executeQuery("select * from film");
 			ResultSetMetaData rsm=rs.getMetaData();
-			System.out.println(rsm);
+			String[] cname = new String[rsm.getColumnCount()];
+			String tabname= rsm.getTableName(1);
+			
+			for(int i=1; i<=rsm.getColumnCount(); ++i){
+				cname[i-1]=rsm.getColumnName(i);
+			}
+			
+			for(int i=0; i<rsm.getColumnCount();++i){
+				System.out.println(cname[i]);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

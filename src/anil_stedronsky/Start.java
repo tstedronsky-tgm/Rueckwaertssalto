@@ -12,10 +12,14 @@ public class Start {
 	public static void main(String[] args) {
 		MysqlDataSource ds= new MysqlDataSource();
 		try {
+			ds.setServerName("localhost");
+			ds.setUser("rueck");
+			ds.setPassword("fener");
+			ds.setDatabaseName("premiere");
 			Connection con = ds.getConnection();
 			// Abfrage vorbereiten und ausführen
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery("select * from xyq");
+			ResultSet rs = st.executeQuery("select * from sender limit 10");
 			ResultSetMetaData rsm=rs.getMetaData();
 			System.out.println(rsm);
 		} catch (SQLException e) {

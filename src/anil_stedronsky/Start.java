@@ -16,8 +16,8 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
  */
 public class Start {
 	public static void main(String[] args) {
-		Model m = new Model("localhost", "rueck", "fener", "schokoladenfabrik"); //DB Connection Parameter werden an das Model übergeben
+		Model m = new Model("localhost", "rueck", "fener", "rueckwaerts"); //DB Connection Parameter werden an das Model übergeben
 		System.out.println(m.getRM());
-		m.close();
+		m.close(); //räumt auf
 	}
 }

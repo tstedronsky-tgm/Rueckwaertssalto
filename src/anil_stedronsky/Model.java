@@ -13,7 +13,7 @@ public class Model {
 	private MysqlDataSource ds;
 	private Connection con;
 	private DatabaseMetaData db;
-	
+
 	/**
 	 * Konstruktor der host, user, pw und database einliest
 	 * @param die Hostadresse
@@ -77,19 +77,19 @@ public class Model {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		/*Schleife die den Attributen den PK hinzufügt*/
 		for(int i=0; i<att.length;++i){
 			for(int j=0; j<prk.length;++j){
 				if(att[i].equals(prk[j])){
-					att[i]+="<PK>";
+					att[i]+="<<PK>>";
 				}
 			}
 		}
 		return att;
 
 	}
-	
+
 	/**
 	 * Liefert den/die PKs zurück 
 	 * @param Die Tabelle die auf PK überprüft werden soll
@@ -107,10 +107,10 @@ public class Model {
 			e1.printStackTrace();
 		}
 		String[] prk=pk.toArray(new String[pk.size()]);
-		
+
 		return prk;
 	}
-	
+
 	/**
 	 * Liefert den/die FKs zurück 
 	 * @param Die Tabelle die auf PK überprüft werden soll
@@ -119,21 +119,34 @@ public class Model {
 	public String[] getFK(String tabname){
 		ArrayList<String> fk = new ArrayList<String>();
 		ResultSet fks;
+		String[] pk = getPK(tabname);
 		try {
 			fks = db.getImportedKeys(null, null, tabname);
 			while (fks.next()) {
-				
+				boolean isPk=false;
 				//Den FK mit den Relations
-				fk.add(fks.getString("FKCOLUMN_NAME")+":"+fks.getString("PKTABLE_NAME")+"."+fks.getString("PKCOLUMN_NAME"));
+				for(int i=0; i<pk.length;++i){
+					if(pk[i].equals(fks.getString("FKCOLUMN_NAME"))){
+						isPk=true;
+					}
+				}
+				//Checkt ob nicht nur ein FK sondern auch ein PK enthalten ist.
+				if(isPk==true){
+					fk.add(fks.getString("FKCOLUMN_NAME")+":"+fks.getString("PKTABLE_NAME")+"."+fks.getString("PKCOLUMN_NAME")+"<<FK>><<PK>>");
+				}
+				else {
+					fk.add(fks.getString("FKCOLUMN_NAME")+":"+fks.getString("PKTABLE_NAME")+"."+fks.getString("PKCOLUMN_NAME")+"<<FK>>");
+				}
+				
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 		String[] frk=fk.toArray(new String[fk.size()]);
-		
 		return frk;
 	}
 	
+
 	/**
 	 * Liefert das fertige RM zurück
 	 * @return das fertige RM

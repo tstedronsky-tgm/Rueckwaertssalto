@@ -126,7 +126,7 @@ public class Model {
 				boolean isPk=false;
 				//Den FK mit den Relations
 				for(int i=0; i<pk.length;++i){
-					if(pk[i].equals(fks.getString("FKCOLUMN_NAME"))){
+					if(pk[i].equals(fks.getString("PKCOLUMN_NAME"))){
 						isPk=true;
 					}
 				}

@@ -1,5 +1,7 @@
 package anil_stedronsky;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -169,6 +171,10 @@ public class Model {
 		}
 		return rm;
 	}
+	
+	/**
+	 * Aufräumen der Verbindung
+	 */
 	public void close(){
 		try {
 			con.close();
@@ -176,5 +182,19 @@ public class Model {
 			e.printStackTrace();
 		}
 
+	}
+	
+	/**
+	 * Erzeugt ein File aus dem RM
+	 */
+	public void generateFile(String name){
+		try {
+			RandomAccessFile f = new RandomAccessFile(name+".txt", "rwd");
+			f.writeBytes(getRM());
+			f.close();
+		} catch (IOException e) {
+			System.err.println("Fehler beim Schreiben des Files");
+		}
+		
 	}
 }

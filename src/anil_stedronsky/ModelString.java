@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
-public class Model {
+public class ModelString {
 	private MysqlDataSource ds;
 	private Connection con;
 	private DatabaseMetaData db;
@@ -23,7 +23,7 @@ public class Model {
 	 * @param Das PW für die DB
 	 * @param Die DB die angesprochen werden soll. 
 	 */
-	public Model(String host, String user, String pw, String database){
+	public ModelString(String host, String user, String pw, String database){
 		this.ds= new MysqlDataSource();
 		ds.setServerName(host);
 		ds.setUser(user);

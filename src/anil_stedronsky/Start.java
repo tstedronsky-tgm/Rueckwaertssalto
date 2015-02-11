@@ -16,6 +16,11 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
  */
 public class Start {
 	public static void main(String[] args) {
+		Datenbank db = new Datenbank("localhost", "rueck", "fener", "premiere");
+		System.out.println(db.createRM());
+		
+		
 		
 	}
+	
 }

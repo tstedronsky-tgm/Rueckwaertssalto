@@ -26,7 +26,7 @@ public class Datenbank {
 	 * @param User-PW fuer die DB
 	 * @param Datenbankname
 	 */
-	private Datenbank(String host, String user, String pw, String database){
+	public Datenbank(String host, String user, String pw, String database){
 		this.ds= new MysqlDataSource();
 		ds.setServerName(host);
 		ds.setUser(user);
@@ -73,6 +73,45 @@ public class Datenbank {
 	public DatabaseMetaData getDatabaseMetaData(){
 		return this.db;
 		
+	}
+	
+	/**
+	 * Liefert die Tabellen in der DB zurück
+	 * @return die Tabellen der DB in einer ArrayList
+	 */
+	public ArrayList<Tabelle> getTables(){
+		return this.tabs;
+	}
+	/**
+	 * Generiert ein fertiges RM
+	 * @return das fertige RM
+	 */
+	public String createRM(){
+		String rm="";
+		for(int i=0; i<tabs.size();++i){
+			ArrayList<Attribut> att = tabs.get(i).getAttributs();
+			rm+=tabs.get(i).getName()+"(";
+			for(int j=0; j<att.size();++j){
+				if((j+1)==att.size()){
+					if(att.get(j).isInstanceOfPK()){
+						rm+=att.get(j).getName()+"<<PK>>";
+					}
+					else {
+						rm+=att.get(j).getName();
+					}
+				}
+				else {
+					if(att.get(j).isInstanceOfPK()){
+						rm+=att.get(j).getName()+"<<PK>>, ";
+					}
+					else {
+						rm+=att.get(j).getName()+", ";
+					}
+				}
+			}
+			rm+=")\n";
+		}
+		return rm;
 	}
 	
 }

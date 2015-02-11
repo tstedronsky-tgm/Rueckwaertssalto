@@ -7,11 +7,7 @@ package anil_stedronsky;
  */
 public class Eigenschaft implements AttributVerhalten{
 	
-	/**
-	 * 
-	 */
 	public void verhalten() {
-		
 		
 	}
 	

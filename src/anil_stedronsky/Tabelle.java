@@ -39,7 +39,7 @@ public class Tabelle {
 			}
 			rs = this.db.getDatabaseMetaData().getImportedKeys(null, null, this.name);
 			while(rs.next()){
-				al.add(rs.getString("FKCOLUMN_NAME"));
+				al.add(rs.getString("FKCOLUMN_NAME")+":"+rs.getString("PKTABLE_NAME")+"."+rs.getString("PKCOLUMN_NAME"));
 			}
 			attr = al.toArray(new String[al.size()]);
 		} catch (SQLException e) {

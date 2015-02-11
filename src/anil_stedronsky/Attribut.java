@@ -71,6 +71,9 @@ public class Attribut {
 		return false;
 	}
 	
+	/**
+	 * 
+	 */
 	public void isFK(){
 		ArrayList<String> fk = new ArrayList<String>();
 		ResultSet fks;
@@ -79,7 +82,6 @@ public class Attribut {
 			while (fks.next()) {
 				if(fks.getString("FKCOLUMN_NAME").equals(this.att)){
 					this.att=this.att+":"+fks.getString("PKTABLE_NAME")+"."+fks.getString("PKCOLUMN_NAME");
-					//this.eig = new FK(eig)
 				}	
 			}
 		} catch (SQLException e1) {

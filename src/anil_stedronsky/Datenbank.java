@@ -18,6 +18,7 @@ public class Datenbank {
 	private MysqlDataSource ds;
 	private Connection con;
 	private DatabaseMetaData db;
+	private String name;
 	
 	/**
 	 * Konstruktor
@@ -32,6 +33,7 @@ public class Datenbank {
 		ds.setUser(user);
 		ds.setPassword(pw);
 		ds.setDatabaseName(database);
+		this.name=database;
 		try {
 			con = ds.getConnection();
 			db = con.getMetaData();
@@ -72,7 +74,6 @@ public class Datenbank {
 	 */
 	public DatabaseMetaData getDatabaseMetaData(){
 		return this.db;
-		
 	}
 	
 	/**
@@ -82,36 +83,15 @@ public class Datenbank {
 	public ArrayList<Tabelle> getTables(){
 		return this.tabs;
 	}
+	
 	/**
-	 * Generiert ein fertiges RM
-	 * @return das fertige RM
+	 * Liefert den Namen der DB zurück
+	 * @return den Namen der DB
 	 */
-	public String createRM(){
-		String rm="";
-		for(int i=0; i<tabs.size();++i){
-			ArrayList<Attribut> att = tabs.get(i).getAttributs();
-			rm+=tabs.get(i).getName()+"(";
-			for(int j=0; j<att.size();++j){
-				if((j+1)==att.size()){
-					if(att.get(j).isInstanceOfPK()){
-						rm+=att.get(j).getName()+"<<PK>>";
-					}
-					else {
-						rm+=att.get(j).getName();
-					}
-				}
-				else {
-					if(att.get(j).isInstanceOfPK()){
-						rm+=att.get(j).getName()+"<<PK>>, ";
-					}
-					else {
-						rm+=att.get(j).getName()+", ";
-					}
-				}
-			}
-			rm+=")\n";
-		}
-		return rm;
+	public String getName(){
+		return this.name;
 	}
+	
+	
 	
 }

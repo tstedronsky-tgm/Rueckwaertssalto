@@ -1,3 +1,0 @@
-film(id<<PK>>,sname,datum,beginn,titel,episode,genre,dauer,land,jahr,regie,bild,ton,darst,inhalt,version,sname:sender.sname<<FK>>,genre:genre.genre<<FK>>)
-genre(genre<<PK>>,version)
-sender(sname<<PK>>,logo,version)

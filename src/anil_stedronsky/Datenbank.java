@@ -22,10 +22,10 @@ public class Datenbank {
 	
 	/**
 	 * Konstruktor
-	 * @param Hostname oder IP
-	 * @param User fuer die DB
-	 * @param User-PW fuer die DB
-	 * @param Datenbankname
+	 * @param host		Hostname oder IP
+	 * @param user		User fuer die DB
+	 * @param pw		User-PW fuer die DB
+	 * @param database	Datenbankname
 	 */
 	public Datenbank(String host, String user, String pw, String database){
 		this.ds= new MysqlDataSource();

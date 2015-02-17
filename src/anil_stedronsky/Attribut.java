@@ -16,17 +16,19 @@ public class Attribut {
 	private Eigenschaft eig;
 	private String PKtable="";
 	private String pkname="";
+	
 	/**
 	 * Konstruktor
-	 * @param Datenbank
-	 * @param Attrbutname
+	 * @param db 		Datenbank
+	 * @param att		Attributname
+	 * @param tabname	Tabellenanme
 	 */
 	public Attribut(Datenbank db, String att, String tabname){
 		this.db=db;
 		this.att=att;
 		this.tabname=tabname;
 		
-		this.isPK();
+		this.isPK(); //Checkt ob das Att ein PK ist
 	}
 	
 	/**

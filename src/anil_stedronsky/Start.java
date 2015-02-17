@@ -15,6 +15,10 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
  * @version 2015-01-20
  */
 public class Start {
+	/**
+	 * Main Methode in der das DB Objekt erzeugt wird und dann mittels dem Exporter in ein RM bzw ERD exportiert wird
+	 * @param args CLI
+	 */
 	public static void main(String[] args) {
 		Datenbank db = new Datenbank("localhost", "rueck", "fener", "rueckwaerts");
 		Exporter ex = new Exporter(db);

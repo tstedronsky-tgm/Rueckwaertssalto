@@ -10,7 +10,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-
+/**
+ *Anfang Klasse nicht mehr in Verwendung!
+ *@author Stedronsky Thomas
+ *@version 2015-01-04
+ */
 public class ModelString {
 	private MysqlDataSource ds;
 	private Connection con;
@@ -18,10 +22,10 @@ public class ModelString {
 
 	/**
 	 * Konstruktor der host, user, pw und database einliest
-	 * @param die Hostadresse
-	 * @param Der DB User
-	 * @param Das PW für die DB
-	 * @param Die DB die angesprochen werden soll. 
+	 * @param host 		die Hostadresse
+	 * @param user 		Der DB User
+	 * @param pw 		Das PW für die DB
+	 * @param database 	Die DB die angesprochen werden soll. 
 	 */
 	public ModelString(String host, String user, String pw, String database){
 		this.ds= new MysqlDataSource();
@@ -60,6 +64,7 @@ public class ModelString {
 
 	/**
 	 * Tables werden zurück gegebem
+	 * @param tabname 	Der Tabellenname
 	 * @return Array mit den Tables
 	 */
 	public String[] getAtt(String tabname) {
@@ -94,7 +99,7 @@ public class ModelString {
 
 	/**
 	 * Liefert den/die PKs zurück 
-	 * @param Die Tabelle die auf PK überprüft werden soll
+	 * @param tabname Die Tabelle die auf PK überprüft werden soll
 	 * @return die PK
 	 */
 	public String[] getPK(String tabname){
@@ -115,7 +120,7 @@ public class ModelString {
 
 	/**
 	 * Liefert den/die FKs zurück 
-	 * @param Die Tabelle die auf PK überprüft werden soll
+	 * @param tabname	Die Tabelle die auf PK überprüft werden soll
 	 * @return die PK
 	 */
 	public String[] getFK(String tabname){
@@ -186,6 +191,7 @@ public class ModelString {
 	
 	/**
 	 * Erzeugt ein File aus dem RM
+	 * @param name 	Der Name des Files
 	 */
 	public void generateFile(String name){
 		try {

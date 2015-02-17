@@ -5,9 +5,18 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
+/**
+ * Die Klasse ist zuständig um in die jeweiligen Formate zu exportieren 
+ * @author Stedronsky Thomas
+ * @version 2015-02-17
+ */
 public class Exporter {
 	private Datenbank db;
-
+	
+	/**
+	 * Konstruktor in der die DB übergeben wird
+	 * @param db Die DB
+	 */
 	public Exporter(Datenbank db){
 		this.db=db;
 	}
@@ -42,6 +51,7 @@ public class Exporter {
 			rm+=")\n";
 		}
 		
+		//Random Acces File im txt Format
 		RandomAccessFile f = null;
 		try {
 			f = new RandomAccessFile("rm.txt", "rwd");
@@ -87,6 +97,7 @@ public class Exporter {
 			rm+=")<br>";
 		}
 		rm +="</body>\n</html>";
+		//RAF in HTML Format
 		RandomAccessFile f = null;
 		try {
 			f = new RandomAccessFile("rm.html", "rwd");
@@ -104,19 +115,23 @@ public class Exporter {
 
 	/**
 	 * Erzeugt ein Dot File mit dem ein ERD erzeugt wird.
+	 * 
+	 * mittels GrpahViz kann dieses geöffnet werden
 	 */
 	public void createER(){
 		ArrayList<Tabelle> tabs = db.getTables();
-		String dot="digraph G {\nsize=\"40,40\"\n";
+		String dot="digraph G {\nsize=\"40,40\"\n"; //Größe
 		for(int i=0; i<tabs.size();++i){
-			dot +=tabs.get(i).getName() + " [shape=box];\n";
+			dot +=tabs.get(i).getName() + " [shape=box];\n"; //Stellt die Ausgabe auf ein Rechteck (Box) Objekttyp
 			ArrayList<Attribut> att=tabs.get(i).getAttributs();
 			for(int j=0; j<att.size();++j){ 
-				dot +=tabs.get(i).getName()+" -> "+att.get(j).getName()+";\n";
+				dot +=tabs.get(i).getName()+" -> "+att.get(j).getName()+";\n"; //Attribute
 			}
 		}
 
 		dot +="}";
+		
+		//dot File mit dem dann mit GraphViz das ER angezeigt werden kann.
 		RandomAccessFile f = null;
 		try {
 			f = new RandomAccessFile("er.dot", "rwd");

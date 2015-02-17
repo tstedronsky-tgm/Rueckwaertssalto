@@ -16,7 +16,8 @@ public class Tabelle {
 	
 	/**
 	 * Konstruktor
-	 * @param Name der Tabelle
+	 * @param db	Die Datenbank 
+	 * @param name	Name  der Tabelle
 	 */
 	public Tabelle(Datenbank db, String name){
 		this.db=db;
